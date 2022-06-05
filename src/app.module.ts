@@ -1,9 +1,11 @@
+import { ProductModule } from './modules/product/product.module';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -20,6 +22,9 @@ import { UserModule } from './modules/user/user.module';
     }),
     UserModule,
     AuthModule,
+    ProductModule,
+    ProductModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}
