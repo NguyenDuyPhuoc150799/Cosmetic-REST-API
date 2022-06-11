@@ -1,4 +1,4 @@
 export enum IPaymentType {
-  cash = 'cast',
+  cash = 'cash',
   card = 'card',
 }
