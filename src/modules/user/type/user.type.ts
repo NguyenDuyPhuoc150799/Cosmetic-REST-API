@@ -17,7 +17,7 @@ export class User implements IUser {
   @ApiProperty()
   facebookId?: string;
 
-  @ApiProperty({ default: Role.customer })
+  @ApiProperty()
   userType: Role;
 
   @ApiProperty()

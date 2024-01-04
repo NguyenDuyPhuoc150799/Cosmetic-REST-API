@@ -11,9 +11,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Role } from '../../interface/role';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Like, Repository, SelectQueryBuilder } from 'typeorm';
+import { Role } from 'src/interface/role';
 
 @Injectable()
 export class UserService {
@@ -81,8 +82,9 @@ export class UserService {
       const user = await this.userEntity.findOne({
         username: userInput.username,
       });
-      if (userPayload.role === Role.customer)
-        userInput.userType = Role.customer;
+      //console.log(userPayload.role);
+      //if (userPayload.role === Role.customer)
+      // userInput.userType = Role.customer;
       if (user) throw new BadRequestException('User is exist');
       return await this.userEntity.save(userInput);
     } catch (err) {

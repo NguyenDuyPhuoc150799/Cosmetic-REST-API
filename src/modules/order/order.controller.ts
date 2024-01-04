@@ -17,7 +17,9 @@ import {
 import { Roles } from '../../decorator/role.decorator';
 import { UserPayload } from '../../decorator/user-payload.decorator';
 import { OrderStatus } from 'src/interface/order-status.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Order')
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}

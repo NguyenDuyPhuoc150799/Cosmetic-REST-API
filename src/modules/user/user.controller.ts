@@ -20,27 +20,31 @@ import {
 import { Role } from '../../interface/role';
 import { Roles } from '../../decorator/role.decorator';
 import { UserFindAllParam } from './dto/user-find-all.input';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
+//@ApiBearerAuth()
 @Controller({
   path: 'user',
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async find(@Param('id') id: string): Promise<User> {
     return this.userService.find(id);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.admin)
+  //@UseGuards(JwtAuthGuard)
+  //@Roles(Role.admin, Role.customer)
   @Get()
   async findAll(@Query() param: UserFindAllParam): Promise<UserOutput> {
     return this.userService.findAll(param);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.customer, Role.admin)
+  //@UseGuards(JwtAuthGuard)
+  //@Roles(Role.customer, Role.admin)
   @Post()
   async create(
     @UserPayload() userPayload: IPayload,

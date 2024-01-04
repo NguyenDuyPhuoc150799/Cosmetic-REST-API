@@ -15,7 +15,9 @@ import { ProducerService } from './producer.service';
 import { Role } from './../../interface/role';
 import { Roles } from './../../decorator/role.decorator';
 import { JwtAuthGuard } from './../../guard/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Producer')
 @Controller('producer')
 export class ProducerController {
   constructor(private readonly producerService: ProducerService) {}
@@ -26,21 +28,21 @@ export class ProducerController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.admin, Role.employee)
+  @Roles(Role.admin, Role.employee, Role.customer)
   @Post()
   async create(@Body() producer: CreateProducerInput): Promise<Producer> {
     return this.producerService.create(producer);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.admin, Role.employee)
+  @Roles(Role.admin, Role.employee, Role.customer)
   @Put()
   async update(@Body() producer: UpdateProducerInput): Promise<Producer> {
     return this.producerService.update(producer);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.admin, Role.employee)
+  @Roles(Role.admin, Role.employee, Role.customer)
   @Delete()
   async delete(@Query('id') id: string): Promise<boolean> {
     return this.producerService.delete(id);

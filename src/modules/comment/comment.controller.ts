@@ -19,7 +19,9 @@ import { Role } from '../../interface/role';
 import { CommentService } from './comment.service';
 import { CreateComment } from './dto/create-comment.input';
 import { Comment } from './type/comment.type';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Comment')
 @Controller({ path: 'comment' })
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
