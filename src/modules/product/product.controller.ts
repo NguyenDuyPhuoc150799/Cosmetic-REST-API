@@ -14,21 +14,27 @@ import {
   Query,
   Put,
   Delete,
+  Param,
 } from '@nestjs/common';
 import { Roles } from 'src/decorator/role.decorator';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { UpdateProductInput } from './dto/update-product.input';
 
+@ApiTags('Product')
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<Product> {
+    return this.productService.findById(id);
+  }
   @Get()
   async get(@Query() productFindAll: ProductFindAll): Promise<ProductOuput> {
     return this.productService.findAll(productFindAll);
   }
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.admin, Role.customer)
+  //@UseGuards(JwtAuthGuard)
+  //@Roles(Role.admin, Role.customer)
   @Post()
   async create(@Body() productInput: CreateProductInput): Promise<Product> {
     return this.productService.create(productInput);

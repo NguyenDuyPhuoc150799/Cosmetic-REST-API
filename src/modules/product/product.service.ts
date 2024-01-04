@@ -21,6 +21,10 @@ export class ProductService {
     private readonly producerEntity: Repository<ProducerEntity>,
   ) {}
 
+  async findById(id: string): Promise<Product> {
+    return await this.productEntity.findOne(id);
+  }
+
   async findAll({
     limit,
     offset,
